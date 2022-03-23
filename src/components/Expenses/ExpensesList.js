@@ -1,21 +1,26 @@
 import React from "react";
-import Card from "../UI/Card";
 import ExpenseItem from "./ExpenseItem";
 import "./ExpensesList.css";
 
 const ExpensesList = (props) => {
+  if (props.items.length === 0) {
+    return (
+      <h2 className="expenses-list__fallback">
+        No Expenses found for that year.
+      </h2>
+    );
+  }
   return (
-    <Card className="expenses">
-      {props.expenses.map((item) => {
-        return (
-          <ExpenseItem
-            title={item.title}
-            date={item.date}
-            amount={item.amount}
-          />
-        );
-      })}
-    </Card>
+    <ul className="expenses-list">
+      {props.items.map((item) => (
+        <ExpenseItem
+          key={item.id}
+          title={item.title}
+          date={item.date}
+          amount={item.amount}
+        />
+      ))}
+    </ul>
   );
 };
 
